@@ -1,0 +1,9 @@
+Exercise 3.1
+
+a) Node.js is a platform for building server side event driven i/o applications. Express.js is a framework based on node.js for building web applications using principles and approaches of node.js.
+b) All npm packages contain a file, usually in the project root, called package.json. This file holds varioud metadata relevant to the project and includes the project's dependencies.
+
+Exercise 3.2
+
+a) A static file is handled using the simplest methods available to the web server. It is the fastest and most efficient way to deliver content. It does not need databases or code to be accessed so it is secure.
+b) The Hello World message is no longer served because when the localhost:3000 is put in the browser, I specified the routing path for which the files will be loaded. Only when I put the correct routing path for "Hello world" will it show up on the browser.
