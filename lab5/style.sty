@@ -1,0 +1,73 @@
+//variables for padding and margin values
+paddingSize = 5px
+marginSize = 0px
+
+body 
+  font: 24px Helvetica;
+  background: #999;
+
+#main 
+  min-height: 800px;
+  margin: marginSize;
+  padding: paddingSize;
+  display: flex;
+  flex-flow: row;
+  /* comment */
+
+ article 
+  margin: marginSize;
+  padding: paddingSize;
+  border: 2px solid #000;
+  border-radius: 0pt;
+  background: #dd8;
+  flex: 3 1 60%;
+  order: 2;
+
+ nav 
+  margin: marginSize;
+  padding: paddingSize;
+  border: 2px solid #000;
+  border-radius: 0pt;
+  background: #ccf;
+  flex: 1 6 20%;
+  order: 1;
+  text-align: right;
+
+ aside 
+  margin: marginSize;
+  padding: paddingSize;
+  border: 2px solid #000;
+  border-radius: 0pt;
+  background: #ccf;
+  flex: 1 6 20%;
+  order: 3;
+
+header, footer 
+  display: block;
+  font-style: italic;
+  margin: 0px;
+  padding: 5px;
+  min-height: 100px;
+  border: 2px solid black;
+  border-radius: 0pt;
+  background: #feb;
+
+header
+  font-weight: bold;
+  font-size: 200%;
+
+/* Too narrow to support three columns */
+@media all and (max-width: 640px) 
+  #main, #page 
+    flex-direction: column;
+  
+  #main > article, nav, aside 
+  //return them to document order
+    order: 0;
+  
+  #main > nav 
+    text-align: left;
+  
+  #main > nav, aside, header, footer 
+    min-height: 50px;
+    max-height: 50px;
