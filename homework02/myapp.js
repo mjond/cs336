@@ -141,7 +141,12 @@ app.get('/addPerson', function(req, res) {
     list.push(new person(req.body.firstName, req.body.lastName, req.body.id, req.body.startDate));
 });
 
-//function to take care of adding a person using /addPerson
-app.get('/addPerson', function(req, res) {
-    list.push(new person(req.body.firstName, req.body.lastName, req.body.id, req.body.startDate));
+//function to take care of finding a person using /getPerson
+app.get('/getPerson', function(req, res) {
+    var id_form = req.body.id;
+    for (var i = 0; i < list.length; i++) {
+        if(list[i].id == id_form) {
+            res.json(list[i].firstName + list[i].lastName);
+        }
+    }
 });

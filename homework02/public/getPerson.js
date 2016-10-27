@@ -6,13 +6,12 @@ Fall 2016
 
 "use strict";
 
-
-
 $('form').submit(function(event) {
 
 	//stop form from submitting the normal way and refreshing the page
 	event.preventDefault();
 
+	var form = $( this );
 	//get form data and save in variable
 	var formData= {
 		'id' : $('input[name=ID]').val()
@@ -21,7 +20,7 @@ $('form').submit(function(event) {
 	//process the form
 	console.log('Ajax request issued...');
 	$.ajax({
-		url: "/getPerson.html"; //url that is used
+		url: "/getPerson"; //url that is used
 		type: "POST"; //set method type
 		data: formData, //the variable where data is stored
 		dataType: 'json', //type of data we want
