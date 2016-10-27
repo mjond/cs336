@@ -1,8 +1,7 @@
 /*
-author: Mark Davis mjd85
-course: CS336 Vander Linden Fall 2016
-assignment: homework01
-date: October 4, 2016
+Calvin College, CS336, homework 2
+Mark Davis mjd85
+Fall 2016
 */
 
 //function to make Person type
@@ -45,25 +44,34 @@ function Age(givenDate) {
 }
 
 //                     *********** start server **************
-var express = require('express');
+
+const express = require('express');
+const bodyParser = require('body-parser');
 var app = express();
+
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //open port 3000
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
 
+
 //default message if no routes given
 app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-//function to take care of '/people' route
+
+//function to list all people with GET
 app.get('/people', function (req,res) {
 	res.json(list);
 });
 
-//function to take care of '/people/id' route
+
+//function to find a person with a given id using GET
 app.get('/person/:ID', function (req, res) {
     var idp = req.params.ID;
     for (var i = 0; i < list.length; i++){
@@ -74,6 +82,33 @@ app.get('/person/:ID', function (req, res) {
     }
     res.sendStatus(404 + " 404");
 });
+
+//function to delete existing person with DELETE
+app.delete('/person/:ID', function (req, res) {
+    var idp = req.params.ID;
+    for (var i = 0; i < list.length; i++){
+        if(list[i].id == idp) {
+            res.json(list[i]);
+            return;
+        }
+    }
+    res.sendStatus(404 + " 404");
+});
+
+//function to modify existing person with PUT
+app.put('/person/:ID', function (req, res) {
+    var idp = req.params.ID;
+    for (var i = 0; i < list.length; i++){
+        if(list[i].id == idp) {
+            i.firstName = req.body.firstName;
+            i.lastName = req.body.lastName;
+            i.id = req.body.id;
+            i.startdate = req.body.startDate;
+        }
+    }
+    res.sendStatus(404 + " 404");
+});
+
 
 //function to take care of '/people/id/name' route
 app.get('/person/:ID/name', function(req, res) {
@@ -87,6 +122,7 @@ app.get('/person/:ID/name', function(req, res) {
 	res.sendStatus(404);
 });
 
+//function to take care of '/people/id/years' route
 app.get('/person/:ID/years', function (req, res) {
     var idp = req.params.ID;
     for (var i = 0; i < list.length; i++) {
@@ -98,4 +134,14 @@ app.get('/person/:ID/years', function (req, res) {
         }
     }
     res.sendStatus(404);
+});
+
+//function to take care of adding a person using /addPerson
+app.get('/addPerson', function(req, res) {
+    list.push(new person(req.body.firstName, req.body.lastName, req.body.id, req.body.startDate));
+});
+
+//function to take care of adding a person using /addPerson
+app.get('/addPerson', function(req, res) {
+    list.push(new person(req.body.firstName, req.body.lastName, req.body.id, req.body.startDate));
 });

@@ -1,0 +1,31 @@
+<!---
+Calvin College, CS336, homework 2
+Mark Davis mjd85
+Fall 2016
+-->
+
+<html>
+	<head>
+		<title>Homework02 - find user by ID</title>
+		<script src="https://code.jquery.com/jquery-latest.js"></script>
+    	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="getPerson.js"></script>
+	</head>
+	<body>
+		<form action="/forms" methods="post">
+
+			<p>Enter ID to get information below</p>
+
+			<div>
+				<label for="firstName">ID:</label>
+				<input type="text" id="ID" name="user_id"/>
+			</div>
+
+			<div class="button">
+                <button type="submit">Find your person</button>
+            </div>
+
+		</form>
+	</body>
+
+</html>
