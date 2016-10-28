@@ -88,8 +88,9 @@ app.delete('/person/:ID', function (req, res) {
     var idp = req.params.ID;
     for (var i = 0; i < list.length; i++){
         if(list[i].id == idp) {
-            res.json(list[i]);
-            return;
+            index = list.indexOf(person);
+            list.splice(index, 1);
+            res.send(person.firstName + " " + person.lastName + " is removed");
         }
     }
     res.sendStatus(404 + " 404");
@@ -104,6 +105,7 @@ app.put('/person/:ID', function (req, res) {
             i.lastName = req.body.lastName;
             i.id = req.body.id;
             i.startdate = req.body.startDate;
+            res.send("User is updated");
         }
     }
     res.sendStatus(404 + " 404");
@@ -137,16 +139,20 @@ app.get('/person/:ID/years', function (req, res) {
 });
 
 //function to take care of adding a person using /addPerson
-app.get('/addPerson', function(req, res) {
+app.post('/addPerson', function(req, res) {
     list.push(new person(req.body.firstName, req.body.lastName, req.body.id, req.body.startDate));
+    resData = {"first": req.body.firstName, "last": req.body.lastName};
+    res.json(JSON.stringifty(resData));
 });
 
 //function to take care of finding a person using /getPerson
-app.get('/getPerson', function(req, res) {
+app.post('/getPerson', function(req, res) {
     var id_form = req.body.id;
     for (var i = 0; i < list.length; i++) {
         if(list[i].id == id_form) {
-            res.json(list[i].firstName + list[i].lastName);
+            resData = {"first": i["firstName"], "last": i["lastName"], 
+                        "id": i["id"], "date": i["startDate"]};
+            res.json(JSON.stringify(resData));
         }
     }
 });
