@@ -13,23 +13,23 @@ $('form').submit(function(event) {
 
 	var form = $( this );
 	//get form data and save in variable
-	var formData= {
-		'id' : $('input[name=ID]').val()
-	}
+	var formData= {"id" : $("#id").val() }
 
 	//process the form
 	console.log('Ajax request issued...');
 	$.ajax({
-		url: "/getPerson"; //url that is used
 		type: "POST"; //set method type
-		data: formData, //the variable where data is stored
+		url: "/getPerson"; //url that is used
+		contentType: 'application/json',
+		data: JSON.stringify(formData), //the variable where data is stored and convert to JSON
 		dataType: 'json', //type of data we want
-		encode : true //convert to json format
+		
 	})
 
 	//if request completed
 	.done(function(json_string) {
 		json = JSON.parse(json_string);
+		//append the new information
 		$("body").append("<p>" + json.firstName +
 			json.lastName + json.ID + json.year + "</p>");
 		console.log('Request complete');
@@ -37,6 +37,7 @@ $('form').submit(function(event) {
 
 	//if request failed
 	.fail(function(xhr, status, errorThrown) {
+		//let user know if failed
 		console.log('Ajax request failed');
 		alert('Ajac request failed');
 	})

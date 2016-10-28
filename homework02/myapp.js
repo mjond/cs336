@@ -43,7 +43,7 @@ function Age(givenDate) {
     return oldness;
 }
 
-//                     *********** start server **************
+//               *********** start server **************
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -88,6 +88,7 @@ app.delete('/person/:ID', function (req, res) {
     var idp = req.params.ID;
     for (var i = 0; i < list.length; i++){
         if(list[i].id == idp) {
+            //delete user 
             index = list.indexOf(person);
             list.splice(index, 1);
             res.send(person.firstName + " " + person.lastName + " is removed");
