@@ -39,7 +39,7 @@ $('form').submit(function(event) {
 		console.log('Request complete');
 	});
 
-	//if request failed
+	//if request failed then send error
 	.fail(function(xhr, status, errorThrown) {
 		//let user know the request failed
 		console.log('Ajax request failed');

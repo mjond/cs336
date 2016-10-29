@@ -26,7 +26,7 @@ $('form').submit(function(event) {
 		
 	})
 
-	//if request completed
+	//if request completed then append new values
 	.done(function(json_string) {
 		json = JSON.parse(json_string);
 		//append the new information

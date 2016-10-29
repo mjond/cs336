@@ -132,6 +132,7 @@ app.get('/person/:ID/years', function (req, res) {
         if(list[i].id == idp) {
 			var start = list[i].startDate;
 			var years = Age(start)
+            //get values in json form
             res.json(list[i].firstName + " has worked " + years + " years");
             return;
         }
