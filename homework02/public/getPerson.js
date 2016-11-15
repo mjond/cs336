@@ -4,7 +4,6 @@ Mark Davis mjd85
 Fall 2016
 */
 
-"use strict";
 
 $('form').submit(function(event) {
 
@@ -30,8 +29,10 @@ $('form').submit(function(event) {
 	.done(function(json_string) {
 		json = JSON.parse(json_string);
 		//append the new information
-		$("body").append("<p>" + json.firstName +
-			json.lastName + json.ID + json.year + "</p>");
+		$("body").append("<p>" + json.firstName + " "
+								 json.lastName + " "
+								 json.ID + " "
+								 json.year + "</p>");
 		console.log('Request complete');
 	});
 
