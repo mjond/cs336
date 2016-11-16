@@ -3,23 +3,19 @@ import $ from 'jquery';
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {author: '', text: ''};
+    return {author: ''};
   },
   handleAuthorChange: function(e) {
     this.setState({author: e.target.value});
   },
-  handleTextChange: function(e) {
-    this.setState({text: e.target.value});
-  },
   handleSubmit: function(e) {
     e.preventDefault();
     var author = this.state.author.trim();
-    var text = this.state.text.trim();
-    if (!text || !author) {
+    if (!author) {
       return;
     }
-    this.props.onCommentSubmit({author: author, text: text});
-    this.setState({author: '', text: ''});
+    this.props.onCommentSubmit({author: author});
+    this.setState({author: ''});
   },
   render: function() {
     return (
@@ -29,12 +25,6 @@ module.exports = React.createClass({
           placeholder="Your name"
           value={this.state.author}
           onChange={this.handleAuthorChange}
-        />
-        <input
-          type="text"
-          placeholder="Say something..."
-          value={this.state.text}
-          onChange={this.handleTextChange}
         />
         <input type="submit" value="Post" />
       </form>

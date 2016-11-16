@@ -4,7 +4,7 @@ import Remarkable from 'remarkable';
 module.exports = React.createClass({
   rawMarkup: function() {
     var md = new Remarkable();
-    var rawMarkup = md.render(this.props.children.toString());
+    //var rawMarkup = md.render(this.props.children.toString());
     return { __html: rawMarkup };
   },
 
@@ -14,7 +14,7 @@ module.exports = React.createClass({
         <h2 className="commentAuthor">
           {this.props.author}
         </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
+        
       </div>
     );
   }
