@@ -38,8 +38,8 @@ app.use(function(req, res, next) {
 
 
 app.get('/api/comments', function(req, res) {
-    db.collection("mynewcollection").find({}).toArray(function(err, docs) {
-        assert.equal(err, null);
+    db.collection("comments").find({}).toArray(function(err, docs) {
+        if (err) throw err;
         res.json(docs);
     });
 });
@@ -52,11 +52,15 @@ app.post('/api/comments', function(req, res) {
         author: req.body.author,
         text: req.body.text,
     };
-    db.collection("mynewcollection").insertOne(newComment, function(err, result) {
- 	assert.equal(err, null);
-        res.json(result);
+    db.collection("comments").insertOne(newComment, function(err, result) {
+        if (err) throw err;
+        db.collection("comments").find({}).toArray(function(err, docs) {
+            if (err) throw err;
+            res.json(docs);
+        });
     });
 });
+
 
 
 var mongoURL = 'mongodb://user1:bjarne@ds043022.mlab.com:43022/mdavis';
