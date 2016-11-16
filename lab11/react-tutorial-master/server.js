@@ -19,6 +19,8 @@ var MongoClient = require('mongodb').MongoClient;
 var db;
 var app = express();
 
+//adding comment for lab11 - exercise 11.2
+
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'dist/')));
