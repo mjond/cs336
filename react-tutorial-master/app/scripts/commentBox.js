@@ -3,18 +3,19 @@ import $ from 'jquery';
 
 import CommentList from './commentList';
 import CommentForm from './commentForm';
+import { API_URL, POLL_INVERVAL } from './global';
 
 module.exports = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({
-      url: this.props.url,
+      url: API_URL,
       dataType: 'json',
       cache: false,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(API_URL, status, err.toString());
       }.bind(this)
     });
   },
@@ -27,7 +28,7 @@ module.exports = React.createClass({
     var newComments = comments.concat([comment]);
     this.setState({data: newComments});
      $.ajax({
-      url: this.props.url,
+      url: API_URL,
       dataType: 'json',
       type: 'POST',
       data: comment,
@@ -36,7 +37,7 @@ module.exports = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({data: comments});
-        console.error(this.props.url, status, err.toString());
+        console.error(API_URL, status, err.toString());
       }.bind(this)
     });
   },
@@ -45,7 +46,7 @@ module.exports = React.createClass({
   },
   componentDidMount: function() {
     this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    setInterval(this.loadCommentsFromServer, POLL_INVERVAL);
   },
   render: function() {
     return (
