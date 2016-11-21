@@ -18,12 +18,11 @@ var assert = require('assert');
 var MongoClient = require('mongodb').MongoClient;
 var db;
 var app = express();
-
+var APP_PATH = path.join(__dirname, 'dist');
 //adding comment for lab11 - exercise 11.2
 
 app.set('port', (process.env.PORT || 3000));
-
-app.use('/', express.static(path.join(__dirname, 'dist/')));
+app.use('/', express.static(APP_PATH));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -47,7 +46,6 @@ app.get('/api/comments', function(req, res) {
 });
 
 
-
 app.post('/api/comments', function(req, res) {
     var newComment = {
         id: Date.now(),
@@ -63,6 +61,8 @@ app.post('/api/comments', function(req, res) {
     });
 });
 
+//listen to all routes/methods not specified
+app.use('*', express.static(APP_PATH));
 
 
 var mongoURL = 'mongodb://user1:bjarne@ds043022.mlab.com:43022/mdavis';
